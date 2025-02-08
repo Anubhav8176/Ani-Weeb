@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "176375101101",
+    "project_id": "aniweeb-4c619",
+    "storage_bucket": "aniweeb-4c619.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176375101101:android:c8fa8b3310c3d8eba8b824",
+        "android_client_info": {
+          "package_name": "com.example.aniweeb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKq-fOh7nU78w8JXu5ZqgNtSDSNBDnb4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
