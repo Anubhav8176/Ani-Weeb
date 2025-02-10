@@ -1,5 +1,11 @@
 package com.example.aniweeb.presentation.core.home
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -57,7 +63,15 @@ fun MainHomeScreen(
             navController = bottomNavController,
             startDestination = BottomNavigationItems.Anime.route
         ) {
-            composable(BottomNavigationItems.Anime.route) {
+            composable(
+                route = BottomNavigationItems.Anime.route,
+                enterTransition = {
+                    scaleIn(
+                        initialScale = 0.6f,
+                        animationSpec = tween(1000)
+                    ) + fadeIn(animationSpec = tween(1500))
+                }
+            ) {
                 AnimeScreen(
                     navController = navController,
                     animeViewModel = animeViewModel,
@@ -66,7 +80,13 @@ fun MainHomeScreen(
             }
 
             composable(
-                BottomNavigationItems.Manga.route
+                route = BottomNavigationItems.Manga.route,
+                enterTransition = {
+                    scaleIn(
+                        initialScale = 0.6f,
+                        animationSpec = tween(1000)
+                    ) + fadeIn(animationSpec = tween(1500))
+                }
             ) {
                 MangaHomeScreen(
                     navController = navController,
@@ -75,7 +95,15 @@ fun MainHomeScreen(
                 )
             }
 
-            composable(BottomNavigationItems.Profile.route) {
+            composable(
+                route = BottomNavigationItems.Profile.route,
+                enterTransition = {
+                    scaleIn(
+                        initialScale = 0.6f,
+                        animationSpec = tween(1000)
+                    ) + fadeIn(animationSpec = tween(1500))
+                }
+            ) {
                 ProfileScreen(
                     navController = navController,
                     authViewmodel = authViewmodel

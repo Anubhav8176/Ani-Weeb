@@ -1,5 +1,11 @@
 package com.example.aniweeb.presentation.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -47,18 +53,60 @@ fun CentralNavigation(
             route = "auth_graph"
         ){
 
-            composable(route = "welcome_screen") {
+            composable(
+                route = "welcome_screen",
+                enterTransition = {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                }
+            ) {
                 WelcomeScreen(
                     navController = navController,
                     modifier = Modifier
                 )
             }
 
-            composable(route = "login_screen") {
+            composable(
+                route = "login_screen",
+                enterTransition = {
+                    scaleIn(
+                        initialScale = 0.6f,
+                        animationSpec = tween(1000)
+                    ) + fadeIn(animationSpec = tween(1500))
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                }
+            ) {
                 LoginScreen(navController, authViewmodel)
             }
 
-            composable(route = "signup_screen") {
+            composable(
+                route = "signup_screen",
+                enterTransition = {
+                    scaleIn(
+                        initialScale = 0.6f,
+                        animationSpec = tween(1000)
+                    ) + fadeIn(animationSpec = tween(1500))
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                }
+            ) {
                 SignUpScreen(navController, authViewmodel)
             }
         }
@@ -67,7 +115,9 @@ fun CentralNavigation(
             startDestination = "home_screen",
             route = "home_graph"
         ){
-            composable("home_screen") {
+            composable(
+                route = "home_screen"
+            ) {
                 MainHomeScreen(
                     navController = navController,
                     animeViewModel = animeViewModel,
@@ -76,11 +126,39 @@ fun CentralNavigation(
                 )
             }
 
-            composable("manga_details_screen") {
+            composable(
+                route = "manga_details_screen",
+                enterTransition = {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                }
+            ) {
                 MangaDetailsScreen(mangaViewModel = mangaViewModel)
             }
 
-            composable("anime_details_screen") {
+            composable(
+                route = "anime_details_screen",
+                enterTransition = {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                }
+            ) {
                 AnimeDetailsScreen(animeViewModel = animeViewModel)
             }
 

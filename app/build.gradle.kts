@@ -66,6 +66,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
+    //Accompanist api
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.5-beta")
+
     implementation("com.google.dagger:hilt-android:2.53.1")
     implementation(libs.firebase.firestore)
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")

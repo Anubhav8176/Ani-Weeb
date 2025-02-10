@@ -12,14 +12,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,6 +46,15 @@ fun AnimeDetailsScreen(
 ) {
 
     val animeInfo by animeViewModel.animeInfo.collectAsState()
+    var isImageLoading by remember { mutableStateOf(true) }
+
+    if (isImageLoading){
+        CircularProgressIndicator(
+            color = Color.DarkGray,
+            modifier = modifier
+                .size(30.dp)
+        )
+    }
 
     Box(
         modifier = modifier
@@ -82,7 +96,10 @@ fun AnimeDetailsScreen(
                     .height(300.dp)
                     .width(200.dp)
                     .clip(RoundedCornerShape(20.dp)),
-                contentScale = ContentScale.FillBounds
+                contentScale = ContentScale.FillBounds,
+                onLoading = {
+                    isImageLoading = false
+                }
             )
 
             Spacer(modifier.height(10.dp))
