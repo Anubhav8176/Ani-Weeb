@@ -47,7 +47,7 @@ class MangaViewModel @Inject constructor(
             try {
                 val response = animeApiInterface.getTopManga("bypopularity")
                 _topManga.value = response
-                Log.i("The Top Manga: ", response.toString())
+//                Log.i("The Top Manga: ", response.toString())
             }catch (e: Exception){
                 Log.e("Didn't get top manga: ", e.message.toString())
             }
@@ -59,7 +59,7 @@ class MangaViewModel @Inject constructor(
             try {
                 val response = animeApiInterface.getLatestManga("publishing")
                 _latestManga.value = response
-                Log.i("The Latest Manga: ", response.toString())
+//                Log.i("The Latest Manga: ", response.toString())
             }catch (e: Exception){
                 Log.e("Didn't get latest manga: ", e.message.toString())
             }

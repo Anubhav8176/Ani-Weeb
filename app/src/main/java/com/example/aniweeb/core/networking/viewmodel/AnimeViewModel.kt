@@ -65,7 +65,7 @@ class AnimeViewModel @Inject constructor(
             try {
                 val response = animeApiInterface.getTopAnime("bypopularity")
                 _topAnime.value = response
-                Log.i("The data: ", response.toString())
+//                Log.i("The data: ", response.toString())
             }catch (e: Exception){
                 Log.e("Failed to load data: ", e.message.toString())
             }
@@ -77,7 +77,7 @@ class AnimeViewModel @Inject constructor(
             try {
                 val response = animeApiInterface.getLatestAnime("airing")
                 _latestAnime.value = response
-                Log.i("The Latest anime: ", response.toString())
+//                Log.i("The Latest anime: ", response.toString())
             }catch (e: Exception){
                 Log.e("Failed to load latest: ", e.message.toString())
             }

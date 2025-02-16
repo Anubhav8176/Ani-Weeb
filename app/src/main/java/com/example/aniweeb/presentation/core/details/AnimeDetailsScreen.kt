@@ -2,6 +2,7 @@ package com.example.aniweeb.presentation.core.details
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,10 +15,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Event
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Movie
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.TrendingUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -63,21 +75,14 @@ fun AnimeDetailsScreen(
         Column(
             modifier = modifier
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
             Column(
                 modifier = modifier
-                    .fillMaxHeight(0.3f)
+                    .fillMaxHeight(0.25f)
                     .fillMaxWidth()
-                    .background(color = Color.Red)
-            ){
-
-            }
-
-            Column(
-                modifier = modifier
-                    .fillMaxHeight(0.7f)
-                    .fillMaxWidth()
+                    .background(color = Color.Magenta)
             ){
 
             }
@@ -85,16 +90,18 @@ fun AnimeDetailsScreen(
 
         Column(
             modifier = modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = modifier.weight(2F))
+            Spacer(modifier = modifier.height(50.dp))
             AsyncImage(
                 model = animeInfo?.data?.images?.webp?.large_image_url,
                 contentDescription = "Anime Cover",
                 modifier = modifier
                     .height(300.dp)
                     .width(200.dp)
+                    .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(20.dp))
                     .clip(RoundedCornerShape(20.dp)),
                 contentScale = ContentScale.FillBounds,
                 onLoading = {
@@ -115,19 +122,63 @@ fun AnimeDetailsScreen(
                     textAlign = TextAlign.Center
                 )
             }
+
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+            ) {
+                Text(
+                    text = "${animeInfo?.data?.status}",
+                    fontSize = 18.sp,
+                    fontFamily = poppinsFamily
+                )
+
+                Spacer(modifier.weight(1F))
+
+                animeInfo?.data?.type?.let {
+                    Text(
+                        text = it,
+                        fontSize = 18.sp,
+                        fontFamily = poppinsFamily
+                    )
+                }
+            }
             Spacer(modifier.height(10.dp))
-            Text(
-                text = "Score ${animeInfo?.data?.score}",
-                fontSize = 18.sp,
-                fontFamily = poppinsFamily
-            )
+
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp)
+            ) {
+                Text(
+                    text = "Score: ${animeInfo?.data?.score}",
+                    fontSize = 18.sp,
+                    fontFamily = poppinsFamily
+                )
+
+                Spacer(modifier.weight(1f))
+
+                Text(
+                    text = "Source: ${animeInfo?.data?.source}",
+                    fontFamily = poppinsFamily,
+                    fontSize = 18.sp
+                )
+            }
             Spacer(modifier = modifier.height(10.dp))
 
             Row(
                 modifier = modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
+                Icon(
+                    imageVector = Icons.Filled.Event,
+                    contentDescription = "Season",
+                    tint = Color(0xFF6200EE)
+                )
+                Spacer(modifier.width(6.dp))
                 animeInfo?.data?.season?.let {
                     Text(
                         fontSize = 18.sp,
@@ -140,7 +191,114 @@ fun AnimeDetailsScreen(
                     fontSize = 18.sp,
                     fontFamily = poppinsFamily
                 )
+
+                Spacer(modifier.weight(1f))
+
+                Row {
+                    Icon(
+                        imageVector = Icons.Filled.Movie,
+                        contentDescription = "episodes",
+                        tint = Color.Blue
+                    )
+                    Spacer(modifier.width(6.dp))
+                    Text(
+                        text = "Episodes: ${animeInfo?.data?.episodes}",
+                        fontSize = 18.sp,
+                        fontFamily = poppinsFamily
+                    )
+                }
             }
+            Spacer(modifier.height(10.dp))
+
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp)
+            ){
+                Icon(
+                    imageVector = Icons.Default.TrendingUp,
+                    contentDescription = "Popularity",
+                    tint = Color.Red
+                )
+                Spacer(modifier.width(5.dp))
+                Text(
+                    text = animeInfo?.data?.popularity.toString(),
+                    fontFamily = poppinsFamily,
+                    fontSize = 18.sp
+                )
+
+                Spacer(modifier.weight(1F))
+
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "Ranking",
+                    tint = Color.Yellow
+                )
+                Spacer(modifier.width(5.dp))
+                Text(
+                    text = animeInfo?.data?.rank.toString(),
+                    fontSize = 18.sp,
+                    fontFamily = poppinsFamily
+                )
+            }
+
+            Spacer(modifier.height(10.dp))
+
+
+            animeInfo?.data?.duration?.let {
+                Text(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp),
+                    text = it,
+                    fontSize = 18.sp,
+                    fontFamily = poppinsFamily,
+                    textAlign = TextAlign.Left
+                )
+            }
+
+            Spacer(modifier.height(10.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+            ){
+                Divider(
+                    modifier = modifier
+                        .weight(1f)
+                        .padding(end = 8.dp),
+                    color = Color.Black
+                )
+                Text(
+                    text = "Description",
+                    fontSize = 18.sp,
+                    fontFamily = poppinsFamily,
+                    color = Color.Black,
+
+                    )
+                Divider(
+                    modifier = modifier
+                        .weight(1f)
+                        .padding(start = 8.dp),
+                    color = Color.Black
+                )
+            }
+
+            Spacer(modifier.height(10.dp))
+
+
+            animeInfo?.data?.synopsis?.let {
+                Text(
+                    modifier = modifier
+                        .padding(horizontal = 10.dp),
+                    text = it,
+                    fontSize = 18.sp,
+                    fontFamily = poppinsFamily,
+                    textAlign = TextAlign.Left
+                )
+            }
+
             Spacer(modifier.height(10.dp))
             Button(
                 modifier = modifier
@@ -162,14 +320,22 @@ fun AnimeDetailsScreen(
                     animeViewModel.addAnimeToFavorite(favoriteAnime)
                 }
             ) {
-                Text(
-                    text = "Add to Favorites",
-                    fontSize = 18.sp,
-                    fontFamily = poppinsFamily
-                )
+                Row {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = "Favorite",
+                        tint = Color.Red
+                    )
+                    Spacer(modifier.width(5.dp))
+                    Text(
+                        text = "Add to Favorites",
+                        fontSize = 18.sp,
+                        fontFamily = poppinsFamily
+                    )
+                }
             }
 
-            Spacer(modifier = modifier.weight(8F))
+            Spacer(modifier = modifier.height(50.dp))
         }
     }
 
