@@ -280,26 +280,31 @@ fun MangaDetailsScreen(
             mangaInfo?.data?.authors?.forEach{author->
                 Column(
                     modifier = modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(15.dp))
-                        .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(15.dp))
-                        .padding(horizontal = 15.dp, vertical = 5.dp)
+                        .padding(10.dp)
                 ) {
-                    Text(
-                        text = author.name,
-                        fontSize = 18.sp,
-                        fontFamily = poppinsFamily
-                    )
-                    Text(
-                        text = author.type,
-                        fontSize = 18.sp,
-                        fontFamily = poppinsFamily
-                    )
-                    Text(
-                        text = "more..",
-                        fontSize = 18.sp,
-                        fontFamily = poppinsFamily
-                    )
+                    Column(
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(15.dp))
+                            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(15.dp))
+                            .padding(horizontal = 15.dp, vertical = 5.dp)
+                    ) {
+                        Text(
+                            text = author.name,
+                            fontSize = 18.sp,
+                            fontFamily = poppinsFamily
+                        )
+                        Text(
+                            text = author.type,
+                            fontSize = 18.sp,
+                            fontFamily = poppinsFamily
+                        )
+                        Text(
+                            text = "more..",
+                            fontSize = 18.sp,
+                            fontFamily = poppinsFamily
+                        )
+                    }
                 }
             }
 

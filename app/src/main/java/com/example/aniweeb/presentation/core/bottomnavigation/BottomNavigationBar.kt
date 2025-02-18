@@ -2,6 +2,7 @@ package com.example.aniweeb.presentation.core.bottomnavigation
 
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -33,7 +34,12 @@ fun BottomNavigationBar(
 
     NavigationBar (
         modifier = modifier
-            .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)),
+            .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
+            .border(
+                width = 1.dp,
+                color = Color.Black,
+                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+            ),
         containerColor = Color.Gray,
         contentColor = Color.White
     ) {
