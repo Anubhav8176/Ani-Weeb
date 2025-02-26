@@ -137,6 +137,7 @@ fun MainHomeScreen(
                     ProfileScreen(
                         navController = navController,
                         authViewmodel = authViewmodel,
+                        animeViewModel = animeViewModel,
                         modifier = modifier.padding(innerpadding)
                     )
                 }

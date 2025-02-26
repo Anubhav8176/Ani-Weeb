@@ -162,6 +162,29 @@ fun CentralNavigation(
                 AnimeDetailsScreen(animeViewModel = animeViewModel)
             }
 
+
+            composable(
+                route = "favorite_screen",
+                enterTransition = {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(1000)
+                    )
+                }
+            ) {
+                FavoriteScreen(
+                    animeViewModel = animeViewModel,
+                    mangaViewModel = mangaViewModel,
+                    navController = navController
+                )
+            }
+
         }
     }
 }

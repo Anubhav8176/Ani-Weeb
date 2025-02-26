@@ -114,6 +114,8 @@ class AnimeViewModel @Inject constructor(
                                 userRef.set(mapOf("favorite" to listOf(favAnime)), SetOptions.merge())
                             }
                         }
+
+                    getAllFavorites()
                 }
             }catch (e: Exception){
                 Log.e("Cannot add to favorite: ", e.message.toString())
@@ -165,11 +167,15 @@ class AnimeViewModel @Inject constructor(
                                     mal_id = (mp["mal_id"] as Long).toInt(),
                                     title = mp["title"] as? String ?: "",
                                     imageUrl = mp["imageUrl"] as? String ?: "",
+                                    popularity = (mp["popularity"] as? Long)?.toInt() ?: 0,
+                                    rank = (mp["rank"] as? Long)?.toInt() ?: 0,
                                     category = mp["category"] as? String ?: ""
                                 )
                             }?: emptyList()
 
                             _favorites.value = favorite
+
+                            Log.i("All Favorites: ", "Favorites fetched from Firebase: ${_favorites.value}")
 
                         }
                         .addOnFailureListener {

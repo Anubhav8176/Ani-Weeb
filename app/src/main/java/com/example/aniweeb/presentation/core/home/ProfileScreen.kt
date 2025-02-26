@@ -17,6 +17,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,13 +33,15 @@ import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.aniweeb.R
 import com.example.aniweeb.authentication.viewmodel.AuthViewmodel
+import com.example.aniweeb.core.networking.viewmodel.AnimeViewModel
 import com.example.aniweeb.ui.theme.poppinsFamily
 
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    authViewmodel: AuthViewmodel
+    authViewmodel: AuthViewmodel,
+    animeViewModel: AnimeViewModel
 ) {
 
     Column(
@@ -47,6 +50,7 @@ fun ProfileScreen(
     ) {
         ProfileUi(
             authViewmodel = authViewmodel,
+            animeViewModel = animeViewModel,
             navController = navController
         )
     }
@@ -56,6 +60,7 @@ fun ProfileScreen(
 fun ProfileUi(
     modifier: Modifier = Modifier,
     authViewmodel: AuthViewmodel,
+    animeViewModel: AnimeViewModel,
     navController: NavHostController
 ) {
     val currentUser by authViewmodel.currentUser.collectAsState()
@@ -69,7 +74,7 @@ fun ProfileUi(
         Spacer(modifier = modifier.height(20.dp))
         AsyncImage(
             modifier = modifier
-                .size(300.dp)
+                .size(275.dp)
                 .clip(CircleShape)
                 .border(
                     width = 2.dp,
@@ -81,6 +86,28 @@ fun ProfileUi(
             placeholder = painterResource(R.drawable.placeholderimage)
         )
         Spacer(modifier.height(20.dp))
+
+        TextButton(
+            onClick = {
+
+            }
+        ) {
+            Text(
+                modifier = modifier
+                    .border(
+                        width = 1.dp,
+                        shape = RoundedCornerShape(15.dp),
+                        color = Color.Black
+                    )
+                    .padding(horizontal = 15.dp, vertical = 7.dp),
+                text = "Edit/Add image!",
+                fontFamily = poppinsFamily,
+                fontSize = 18.sp,
+                color = Color.White
+            )
+        }
+
+        Spacer(modifier.height(10.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = modifier
@@ -120,6 +147,15 @@ fun ProfileUi(
         currentUser?.gender?.let {
             Text(
                 text = "Gender: $it",
+                fontFamily = poppinsFamily,
+                fontSize = 18.sp,
+                color = Color.White
+            )
+        }
+        Spacer(modifier.height(10.dp))
+        currentUser?.email?.let {
+            Text(
+                text = "Email: $it",
                 fontFamily = poppinsFamily,
                 fontSize = 18.sp,
                 color = Color.White
@@ -172,7 +208,8 @@ fun ProfileUi(
             ),
             elevation = ButtonDefaults.elevatedButtonElevation(15.dp),
             onClick = {
-
+                animeViewModel.getAllFavorites()
+                navController.navigate("favorite_screen")
             }
         ) {
             Text(

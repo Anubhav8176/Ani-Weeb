@@ -315,6 +315,8 @@ fun AnimeDetailsScreen(
                         mal_id = animeInfo?.data?.mal_id!!,
                         title = animeInfo?.data?.title!!,
                         imageUrl = animeInfo?.data?.images?.webp?.large_image_url!!,
+                        popularity = animeInfo?.data?.popularity!!,
+                        rank = animeInfo?.data?.rank!!,
                         category = "anime"
                     )
                     animeViewModel.addAnimeToFavorite(favoriteAnime)

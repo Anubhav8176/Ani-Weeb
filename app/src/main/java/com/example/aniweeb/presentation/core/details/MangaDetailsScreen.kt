@@ -324,6 +324,8 @@ fun MangaDetailsScreen(
                         mal_id = mangaInfo?.data?.mal_id!!,
                         title = mangaInfo?.data?.title!!,
                         imageUrl = mangaInfo?.data?.images?.webp?.large_image_url!!,
+                        popularity = mangaInfo?.data?.popularity!!,
+                        rank = mangaInfo?.data?.rank!!,
                         category = "manga"
                     )
 
