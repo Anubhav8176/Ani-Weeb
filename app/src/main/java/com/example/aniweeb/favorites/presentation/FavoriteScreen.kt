@@ -1,5 +1,6 @@
 package com.example.aniweeb.favorites.presentation
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,6 +17,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -209,58 +216,93 @@ fun FavoriteTile(
     mangaViewModel: MangaViewModel,
     modifier: Modifier = Modifier
 ) {
-   Row (
-       modifier = modifier
-           .padding(
-               horizontal = 10.dp,
-               vertical = 15.dp
-           )
-           .fillMaxWidth()
-           .clickable {
-                if (favorite.category == "anime"){
-                    animeViewModel.getAnimeInfoById(favorite.mal_id)
-                    navController.navigate("anime_details_screen")
-                }else{
-                    mangaViewModel.getMangaById(favorite.mal_id)
-                    navController.navigate("manga_details_screen")
-                }
-           }
-   ){
-       AsyncImage(
+   Column {
+       Row (
            modifier = modifier
-               .height(200.dp)
-               .width(150.dp)
-               .clip(RoundedCornerShape(20.dp)),
-           model = favorite.imageUrl,
-           contentScale = ContentScale.FillBounds,
-           contentDescription = "Anime cover"
-       )
-
-       Column (
-           modifier = modifier
-               .padding(horizontal = 10.dp)
+               .padding(
+                   horizontal = 10.dp,
+                   vertical = 15.dp
+               )
+               .fillMaxWidth()
+               .clickable {
+                   if (favorite.category == "anime"){
+                       animeViewModel.getAnimeInfoById(favorite.mal_id)
+                       navController.navigate("anime_details_screen")
+                   }else{
+                       mangaViewModel.getMangaById(favorite.mal_id)
+                       navController.navigate("manga_details_screen")
+                   }
+               }
        ){
-           Text(
-               text = favorite.title,
-               fontSize = 20.sp,
-               fontFamily = poppinsFamily,
-               textDecoration = TextDecoration.Underline,
-               color = Color.White
+           AsyncImage(
+               modifier = modifier
+                   .height(200.dp)
+                   .width(150.dp)
+                   .clip(RoundedCornerShape(20.dp)),
+               model = favorite.imageUrl,
+               contentScale = ContentScale.FillBounds,
+               contentDescription = "Anime cover"
            )
-           Spacer(modifier.height(20.dp))
-           Text(
-               text = "Popularity: ${favorite.popularity}",
-               fontSize = 18.sp,
-               fontFamily = poppinsFamily,
-               color = Color.White
-           )
-           Spacer(modifier.height(4.dp))
-           Text(
-               text = "Rank: ${favorite.rank}",
-               fontSize = 18.sp,
-               fontFamily = poppinsFamily,
-               color = Color.White
-           )
+
+           Column (
+               modifier = modifier
+                   .padding(horizontal = 10.dp)
+           ){
+               Text(
+                   text = favorite.title,
+                   fontSize = 20.sp,
+                   fontFamily = poppinsFamily,
+                   textDecoration = TextDecoration.Underline,
+                   color = Color.White
+               )
+               Spacer(modifier.height(20.dp))
+               Text(
+                   text = "Popularity: ${favorite.popularity}",
+                   fontSize = 18.sp,
+                   fontFamily = poppinsFamily,
+                   color = Color.White
+               )
+               Spacer(modifier.height(4.dp))
+               Text(
+                   text = "Rank: ${favorite.rank}",
+                   fontSize = 18.sp,
+                   fontFamily = poppinsFamily,
+                   color = Color.White
+               )
+           }
        }
+
+       Button(
+           modifier = modifier
+               .padding(horizontal = 20.dp)
+               .fillMaxWidth(),
+           shape = RoundedCornerShape(10.dp),
+           border = BorderStroke(width = 1.dp, color = Color.Black),
+           colors = ButtonDefaults.buttonColors(
+               contentColor = Color.Black,
+               containerColor = Color.White
+           ),
+           elevation = ButtonDefaults.elevatedButtonElevation(10.dp),
+           onClick = {
+               animeViewModel.deleteFavoriteAnime(favorite)
+           }
+       ) {
+           Row {
+               Icon(
+                   imageVector = Icons.Default.Delete,
+                   contentDescription = "Delete"
+               )
+
+               Spacer(modifier.width(5.dp))
+
+               Text(
+                   text = "Remove favorite!!",
+                   fontSize = 18.sp,
+                   fontFamily = poppinsFamily
+               )
+           }
+       }
+       Spacer(modifier.height(13.dp))
+       HorizontalDivider(thickness = 2.dp)
    }
 }

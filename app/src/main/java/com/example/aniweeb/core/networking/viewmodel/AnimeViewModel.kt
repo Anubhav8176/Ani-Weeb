@@ -135,6 +135,7 @@ class AnimeViewModel @Inject constructor(
                         .document(userId)
                         .update("favorite", FieldValue.arrayRemove(favAnime))
                         .addOnSuccessListener {
+                            getAllFavorites()
                             Log.i("Delete favorite: ", "It's a success!!")
                         }
                         .addOnFailureListener {
