@@ -55,11 +55,11 @@ fun AnimeScreen(
     val latestAnime by animeViewModel.latestAnime.collectAsState()
     val allAnime by animeViewModel.allAnime.collectAsState()
 
-    LaunchedEffect (Unit){
-        animeViewModel.getTopAnime()
-        animeViewModel.getLatestAnime()
-        animeViewModel.getAnime()
-    }
+//    LaunchedEffect (Unit){
+//        animeViewModel.getTopAnime()
+//        animeViewModel.getLatestAnime()
+//        animeViewModel.getAnime()
+//    }
 
     LazyColumn (
         modifier = modifier

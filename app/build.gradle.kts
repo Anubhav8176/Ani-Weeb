@@ -48,6 +48,7 @@ kapt {
 }
 
 dependencies {
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
     implementation("androidx.navigation:navigation-compose:2.8.6")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.7")

@@ -25,12 +25,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.example.aniweeb.R
 import com.example.aniweeb.authentication.viewmodel.AuthViewmodel
 import com.example.aniweeb.core.networking.viewmodel.AnimeViewModel
@@ -81,9 +85,13 @@ fun ProfileUi(
                     shape = CircleShape,
                     color = Color.Black
                 ),
-            model = currentUser?.imageUrl,
-            contentDescription = "User Profile picture!",
-            placeholder = painterResource(R.drawable.placeholderimage)
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(currentUser?.imageUrl)
+                .build(),
+            placeholder = painterResource(R.drawable.images),
+            error = painterResource(R.drawable.images),
+            contentScale = ContentScale.FillBounds,
+            contentDescription = "User Profile picture!"
         )
         Spacer(modifier.height(20.dp))
 

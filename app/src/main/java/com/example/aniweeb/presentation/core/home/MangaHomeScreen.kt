@@ -54,11 +54,11 @@ fun MangaHomeScreen(
     val latestManga by mangaViewModel.latestManga.collectAsState()
     val allManga by mangaViewModel.allManga.collectAsState()
 
-    LaunchedEffect(Unit) {
-        mangaViewModel.getLatestManga()
-        mangaViewModel.getAllManga()
-        mangaViewModel.getTopManga()
-    }
+//    LaunchedEffect(Unit) {
+//        mangaViewModel.getLatestManga()
+//        mangaViewModel.getAllManga()
+//        mangaViewModel.getTopManga()
+//    }
 
     LazyColumn (
         modifier = modifier
