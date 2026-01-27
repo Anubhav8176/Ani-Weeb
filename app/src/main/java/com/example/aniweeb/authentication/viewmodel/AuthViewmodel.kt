@@ -36,18 +36,23 @@ class AuthViewmodel @Inject constructor(
 
     fun loginUser(email: String, password: String){
         viewModelScope.launch {
+            _isLoggedIn.value = AuthResponse.Loading
             auth
                 .signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    _isLoggedIn.value = AuthResponse.Success
                     getCurrentUser()
-                    Log.i("Login user", "Login successful!")
+                    _isLoggedIn.value = AuthResponse.Success
                 }
                 .addOnFailureListener {
                     _isLoggedIn.value = AuthResponse.Failure(it.message.toString())
-                    Log.e("Login user", "Login is unsuccessful!")
                 }
+
+            _isLoggedIn.value = AuthResponse.Idle
         }
+    }
+
+    fun makeIsLoggedInIdle(){
+        _isLoggedIn.value = AuthResponse.Idle
     }
 
     fun registerUser(userInfo: UserInfo, password: String){

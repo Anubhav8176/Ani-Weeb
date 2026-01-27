@@ -66,20 +66,22 @@ fun LoginScreen(
     modifier: Modifier = Modifier
 ) {
 
+    val context = LocalContext.current
+
     var email by remember {mutableStateOf("")}
     var password by remember { mutableStateOf("") }
     val isLoggedIn by authViewmodel.isLoggedIn.collectAsState()
     var passwordVisi by remember { mutableStateOf(false) }
-    var isLoading by remember { mutableStateOf(true) }
+    var showCircularBar by remember { mutableStateOf(false) }
 
     when(isLoggedIn){
         is AuthResponse.Failure -> {
-            isLoading = false
-
             Toast.makeText(LocalContext.current, (isLoggedIn as AuthResponse.Failure).message, Toast.LENGTH_SHORT).show()
+            authViewmodel.makeIsLoggedInIdle()
+            showCircularBar = false
         }
         AuthResponse.Loading -> {
-            isLoading = true
+            showCircularBar = true
         }
         AuthResponse.Success -> {
             navController.navigate("home_graph"){
@@ -88,10 +90,12 @@ fun LoginScreen(
                 }
                 launchSingleTop = true
             }
-            isLoading = false
+            authViewmodel.makeIsLoggedInIdle()
+            showCircularBar = false
         }
-        else -> {
-            isLoading = false
+        AuthResponse.Idle -> {
+            authViewmodel.makeIsLoggedInIdle()
+            showCircularBar = false
         }
     }
 
@@ -296,12 +300,19 @@ fun LoginScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 15.dp, vertical = 10.dp),
                         onClick = {
-                            isLoading = true
-                            authViewmodel.loginUser(email, password)
+                            if (email.isNotEmpty()){
+                                if (password.isNotEmpty()){
+                                    authViewmodel.loginUser(email, password)
+                                }else{
+                                    Toast.makeText(context, "Password cannot be empty!", Toast.LENGTH_SHORT).show()
+                                }
+                            }else{
+                                Toast.makeText(context, "Email cannot be empty!", Toast.LENGTH_SHORT).show()
+                            }
                         },
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        if (isLoading){
+                        if (showCircularBar){
                             CircularProgressIndicator(
                                 color = Color.White,
                                 modifier = modifier.size(25.dp)
@@ -322,7 +333,7 @@ fun LoginScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 20.dp)
                     ){
-                        Divider(
+                        HorizontalDivider(
                             modifier = modifier
                                 .weight(1f)
                                 .padding(end = 5.dp),
@@ -334,7 +345,7 @@ fun LoginScreen(
                             color = Color.White,
 
                         )
-                        Divider(
+                        HorizontalDivider(
                             modifier = modifier
                                 .weight(1f)
                                 .padding(start = 5.dp),

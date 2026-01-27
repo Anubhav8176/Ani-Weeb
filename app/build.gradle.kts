@@ -48,31 +48,36 @@ kapt {
 }
 
 dependencies {
-    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation(libs.androidx.core.splashscreen)
 
-    implementation("androidx.navigation:navigation-compose:2.8.6")
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.7.7")
-    implementation("com.google.android.gms:play-services-auth:21.3.0")
-    implementation("androidx.compose.material:material-icons-extended:1.7.5")
-    implementation("io.coil-kt.coil3:coil-compose:3.0.4")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.ui.text.google.fonts)
+    implementation(libs.play.services.auth)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
-    implementation("androidx.compose.material:material-icons-extended:1.7.7")
+    implementation(libs.androidx.material.icons.extended)
 
     //Navigation
-    implementation("androidx.compose.ui:ui:1.7.7")
-    implementation("androidx.navigation:navigation-compose:2.8.6")
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.navigation.compose.v286)
 
     //Retrofit dependency
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
     //Accompanist api
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.5-beta")
+    implementation(libs.accompanist.navigation.animation)
 
-    implementation("com.google.dagger:hilt-android:2.53.1")
+    //Credential Manager
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+    implementation(libs.hilt.android)
     implementation(libs.firebase.firestore)
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

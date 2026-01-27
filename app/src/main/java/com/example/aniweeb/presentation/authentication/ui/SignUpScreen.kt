@@ -31,6 +31,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -84,16 +85,14 @@ fun SignUpScreen(
     var password by remember { mutableStateOf("") }
     val isLoggedIn by authViewmodel.isLoggedIn.collectAsState()
     var passwordVisi by remember { mutableStateOf(false) }
-    var isLoading by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     when(isLoggedIn){
         is AuthResponse.Failure -> {
-            isLoading = false
-            Toast.makeText(LocalContext.current, (isLoggedIn as AuthResponse.Failure).message, Toast.LENGTH_SHORT).show()
-            Log.e("Authentication failure: ", (isLoggedIn as AuthResponse.Failure).message)
+            Toast.makeText(context, (isLoggedIn as AuthResponse.Failure).message, Toast.LENGTH_SHORT).show()
+            authViewmodel.makeIsLoggedInIdle()
         }
         AuthResponse.Loading -> {
-            isLoading = true
         }
         AuthResponse.Success -> {
             navController.navigate("home_graph"){
@@ -102,10 +101,10 @@ fun SignUpScreen(
                 }
                 launchSingleTop = true
             }
-            isLoading = false
+            authViewmodel.makeIsLoggedInIdle()
         }
         else -> {
-            isLoading = false
+            authViewmodel.makeIsLoggedInIdle()
         }
     }
 
@@ -415,17 +414,20 @@ fun SignUpScreen(
                             .padding(horizontal = 15.dp, vertical = 10.dp),
                         shape = RoundedCornerShape(10.dp),
                         onClick = {
-                            isLoading = true
                             val newUser = UserInfo(
                                 name = name,
                                 email = email,
                                 gender = gendersList[dropDownIndex],
                                 imageUrl = ""
                             )
-                            authViewmodel.registerUser(newUser, password)
+                            if (newUser.name.isNotBlank() && newUser.email.isNotBlank() && password.isNotBlank()){
+                                authViewmodel.registerUser(newUser, password)
+                            }else{
+                                Toast.makeText(context, "Fill all the details.", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     ) {
-                        if (isLoading){
+                        if (isLoggedIn == AuthResponse.Loading){
                             CircularProgressIndicator(
                                 color = Color.White,
                                 modifier = modifier
@@ -446,7 +448,7 @@ fun SignUpScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 20.dp)
                     ){
-                        Divider(
+                        HorizontalDivider(
                             modifier = modifier
                                 .weight(1f)
                                 .padding(end = 5.dp),
@@ -458,7 +460,7 @@ fun SignUpScreen(
                             color = Color.White,
 
                             )
-                        Divider(
+                        HorizontalDivider(
                             modifier = modifier
                                 .weight(1f)
                                 .padding(start = 5.dp),
