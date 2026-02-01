@@ -12,7 +12,20 @@
           "package_name": "com.example.aniweeb"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "176375101101-qtllkb7ish56t7oo26mpotl6q4invd20.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aniweeb",
+            "certificate_hash": "8ca970810fcb2b97ae821bf3cf648d5fe04f8386"
+          }
+        },
+        {
+          "client_id": "176375101101-l1bvd04ljq2giqghkf3j6ns199udtlls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAKq-fOh7nU78w8JXu5ZqgNtSDSNBDnb4w"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176375101101-l1bvd04ljq2giqghkf3j6ns199udtlls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

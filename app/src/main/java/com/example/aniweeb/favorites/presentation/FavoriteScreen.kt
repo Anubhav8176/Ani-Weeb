@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +20,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -86,7 +88,10 @@ fun FavoriteScreen(
             ) {
                 Box(
                     modifier = modifier
-                        .clickable {
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(bounded = true)
+                        ) {
                             selectedFavoriteAnimeTab = !selectedFavoriteAnimeTab
                         }
                         .padding(
@@ -117,7 +122,10 @@ fun FavoriteScreen(
 
                 Box(
                     modifier = modifier
-                        .clickable {
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(bounded = true)
+                        ) {
                             selectedFavoriteAnimeTab = !selectedFavoriteAnimeTab
                         }
                         .padding(
@@ -224,7 +232,10 @@ fun FavoriteTile(
                    vertical = 15.dp
                )
                .fillMaxWidth()
-               .clickable {
+               .clickable(
+                   interactionSource = remember { MutableInteractionSource() },
+                   indication = rememberRipple(bounded = true)
+               ) {
                    if (favorite.category == "anime"){
                        animeViewModel.getAnimeInfoById(favorite.mal_id)
                        navController.navigate("anime_details_screen")

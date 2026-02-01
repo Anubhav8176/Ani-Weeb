@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
@@ -268,7 +270,10 @@ fun SignUpScreen(
                             Row(
                                 modifier = modifier
                                     .fillMaxWidth(0.85f)
-                                    .clickable {
+                                    .clickable(
+                                        interactionSource = remember { MutableInteractionSource() },
+                                        indication = rememberRipple(bounded = true)
+                                    ) {
                                         showDropDown = true
                                     },
                                 verticalAlignment = Alignment.CenterVertically
@@ -390,7 +395,10 @@ fun SignUpScreen(
                         Spacer(modifier = modifier.width(5.dp))
                         Text(
                             modifier = modifier
-                                .clickable {
+                                .clickable(
+                                    interactionSource = remember { MutableInteractionSource() },
+                                    indication = rememberRipple(bounded = true)
+                                ) {
                                     navController.navigate("login_screen"){
                                         popUpTo(navController.graph.startDestinationId){
                                             inclusive = true
@@ -473,7 +481,7 @@ fun SignUpScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 15.dp, vertical = 10.dp),
                         onClick = {
-
+                            authViewmodel.signInWithGoogleButton()
                         },
                         shape = RoundedCornerShape(10.dp)
                     ) {
