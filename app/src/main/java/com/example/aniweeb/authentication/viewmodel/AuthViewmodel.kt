@@ -26,13 +26,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel
 class AuthViewmodel @Inject constructor(
     @ApplicationContext private val context: Context,
     val auth: FirebaseAuth,
-    val firestore: FirebaseFirestore,
-    val googleSignInClient: GoogleSignInClient
+    val firestore: FirebaseFirestore
 ):ViewModel() {
 
     private val _isLoggedIn = MutableStateFlow<AuthResponse>(AuthResponse.Idle)
@@ -97,7 +97,7 @@ class AuthViewmodel @Inject constructor(
         }
     }
 
-    //Authentication using google accounts
+    //Authentication using Google accounts
     fun signInWithGoogleButton() {
         viewModelScope.launch {
             try {
@@ -105,7 +105,6 @@ class AuthViewmodel @Inject constructor(
                 val credentialManager: CredentialManager = CredentialManager.create(context)
 
                 val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
-                    .setFilterByAuthorizedAccounts(false)
                     .setServerClientId(context.getString(R.string.web_client_id))
                     .build()
 
@@ -122,12 +121,13 @@ class AuthViewmodel @Inject constructor(
 
                 handleSignIn(credential)
             }catch (e: GetCredentialException){
+                Log.e("Sign-In with Google: ", "Error=> $e")
                 _isLoggedIn.value = AuthResponse.Failure("An unexpected error encountered in signing in with google.")
             }
         }
     }
 
-    private suspend fun handleSignIn(credential: Credential?){
+    private fun handleSignIn(credential: Credential?){
         if (credential is CustomCredential && credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL){
             val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
             firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
@@ -136,7 +136,7 @@ class AuthViewmodel @Inject constructor(
         }
     }
 
-    private suspend fun firebaseAuthWithGoogle(idToken: String){
+    private fun firebaseAuthWithGoogle(idToken: String){
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener { authentication->
@@ -146,7 +146,6 @@ class AuthViewmodel @Inject constructor(
                         val userInfo = UserInfo(
                             name = currentUser.displayName.toString(),
                             email = currentUser.email.toString(),
-                            gender = "",
                             imageUrl = currentUser.photoUrl.toString()
                         )
 

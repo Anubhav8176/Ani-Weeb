@@ -152,15 +152,6 @@ fun ProfileUi(
             )
         }
         Spacer(modifier.height(10.dp))
-        currentUser?.gender?.let {
-            Text(
-                text = "Gender: $it",
-                fontFamily = poppinsFamily,
-                fontSize = 18.sp,
-                color = Color.White
-            )
-        }
-        Spacer(modifier.height(10.dp))
         currentUser?.email?.let {
             Text(
                 text = "Email: $it",
