@@ -98,11 +98,11 @@ class AuthViewmodel @Inject constructor(
     }
 
     //Authentication using Google accounts
-    fun signInWithGoogleButton() {
+    fun signInWithGoogleButton(activityContext: Context) {
         viewModelScope.launch {
             try {
 
-                val credentialManager: CredentialManager = CredentialManager.create(context)
+                val credentialManager: CredentialManager = CredentialManager.create(activityContext)
 
                 val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
                     .setFilterByAuthorizedAccounts(false)
@@ -116,7 +116,7 @@ class AuthViewmodel @Inject constructor(
 
                 val result = credentialManager.getCredential(
                     request = request,
-                    context = context
+                    context = activityContext
                 )
 
                 val credential = result.credential

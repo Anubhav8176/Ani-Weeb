@@ -50,6 +50,8 @@ class MainActivity : ComponentActivity() {
 
         splashScreen.setKeepOnScreenCondition{true}
 
+        enableEdgeToEdge()
+
         lifecycleScope.launch {
             animeViewModel.getTopAnime()
             animeViewModel.getLatestAnime()

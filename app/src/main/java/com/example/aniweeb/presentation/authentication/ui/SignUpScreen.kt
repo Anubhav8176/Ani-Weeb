@@ -125,7 +125,7 @@ fun SignUpScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.33f),
+                .fillMaxHeight(0.3f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -145,7 +145,7 @@ fun SignUpScreen(
                     .fillMaxWidth(),
                 text = "ようこそ!",
                 fontFamily = pacificoFamily,
-                fontSize = 40.sp,
+                fontSize = 35.sp,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFFF8F8F8)
@@ -163,7 +163,7 @@ fun SignUpScreen(
                 modifier = modifier
                     .fillMaxWidth(0.88f),
                 text = "Your name",
-                fontSize = 16.sp,
+                fontSize = 15.sp,
                 fontFamily = poppinsFamily,
                 color = Color.White
             )
@@ -192,7 +192,7 @@ fun SignUpScreen(
                     Text(
                         text = "Enter you name!",
                         fontFamily = poppinsFamily,
-                        fontSize = 18.sp,
+                        fontSize = 14.sp,
                         color = Color.White
                     )
                 }
@@ -204,7 +204,7 @@ fun SignUpScreen(
                 modifier = modifier
                     .fillMaxWidth(0.88f),
                 text = "Email",
-                fontSize = 16.sp,
+                fontSize = 15.sp,
                 fontFamily = poppinsFamily,
                 color = Color.White
             )
@@ -233,7 +233,7 @@ fun SignUpScreen(
                     Text(
                         text = "Enter you email!",
                         fontFamily = poppinsFamily,
-                        fontSize = 18.sp,
+                        fontSize = 14.sp,
                         color = Color.White
                     )
                 }
@@ -245,7 +245,7 @@ fun SignUpScreen(
                 modifier = modifier
                     .fillMaxWidth(0.88f),
                 text = "Password",
-                fontSize = 16.sp,
+                fontSize = 15.sp,
                 fontFamily = poppinsFamily,
                 color = Color.White
             )
@@ -288,7 +288,7 @@ fun SignUpScreen(
                     Text(
                         text = "Enter you password!",
                         fontFamily = poppinsFamily,
-                        fontSize = 18.sp,
+                        fontSize = 14.sp,
                         color = Color.White
                     )
                 }
@@ -316,7 +316,7 @@ fun SignUpScreen(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFE487FB)
                 ),
-                contentPadding = PaddingValues(vertical = 15.dp)
+                contentPadding = PaddingValues(vertical = 13.dp)
             ) {
                 if (isLoggedIn == AuthResponse.Loading){
                     CircularProgressIndicator(
@@ -327,9 +327,10 @@ fun SignUpScreen(
                 }else {
                     Text(
                         text = "Register!!",
-                        fontSize = 18.sp,
+                        fontSize = 14.sp,
                         fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
                 }
             }
@@ -348,7 +349,7 @@ fun SignUpScreen(
                 )
                 Text(
                     text = "OR",
-                    fontSize = 18.sp,
+                    fontSize = 14.sp,
                     color = Color.White,
 
                     )
@@ -377,7 +378,7 @@ fun SignUpScreen(
                             color = Color.White
                         ),
                     onClick = {
-                        authViewmodel.signInWithGoogleButton()
+                        authViewmodel.signInWithGoogleButton(context)
                     },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(
@@ -441,7 +442,7 @@ fun SignUpScreen(
             ) {
                 Text(
                     text = "Already registered?",
-                    fontSize = 18.sp,
+                    fontSize = 14.sp,
                     color = Color.White,
                     fontFamily = poppinsFamily
                 )
@@ -461,7 +462,7 @@ fun SignUpScreen(
 
                         },
                     text = "Log In",
-                    fontSize = 18.sp,
+                    fontSize = 14.sp,
                     color = Color.White,
                     fontFamily = poppinsFamily
                 )

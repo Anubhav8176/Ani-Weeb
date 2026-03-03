@@ -120,7 +120,7 @@ fun LoginScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.4f),
+                .fillMaxHeight(0.35f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -142,7 +142,7 @@ fun LoginScreen(
                     .fillMaxWidth(),
                 text = "ひさしぶり!",
                 fontFamily = pacificoFamily,
-                fontSize = 40.sp,
+                fontSize = 35.sp,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFFF8F8F8)
@@ -159,7 +159,7 @@ fun LoginScreen(
                 modifier = modifier
                     .fillMaxWidth(0.88f),
                 text = "Email",
-                fontSize = 16.sp,
+                fontSize = 15.sp,
                 fontFamily = poppinsFamily,
                 color = Color.White
             )
@@ -188,7 +188,7 @@ fun LoginScreen(
                     Text(
                         text = "Enter you email!",
                         fontFamily = poppinsFamily,
-                        fontSize = 18.sp,
+                        fontSize = 14.sp,
                         color = Color.White
                     )
                 }
@@ -200,7 +200,7 @@ fun LoginScreen(
                 modifier = modifier
                     .fillMaxWidth(0.88f),
                 text = "Password",
-                fontSize = 16.sp,
+                fontSize = 15.sp,
                 fontFamily = poppinsFamily,
                 color = Color.White
             )
@@ -243,7 +243,7 @@ fun LoginScreen(
                     Text(
                         text = "Enter you password!",
                         fontFamily = poppinsFamily,
-                        fontSize = 18.sp,
+                        fontSize = 14.sp,
                         color = Color.White
                     )
                 }
@@ -254,7 +254,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth(0.9f),
                 text = "Forgot Password?",
-                fontSize = 18.sp,
+                fontSize = 14.sp,
                 color = Color.White,
                 textAlign = TextAlign.End
             )
@@ -280,7 +280,7 @@ fun LoginScreen(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFE487FB)
                 ),
-                contentPadding = PaddingValues(vertical = 15.dp)
+                contentPadding = PaddingValues(vertical = 13.dp)
             ) {
                 if (showCircularBar){
                     CircularProgressIndicator(
@@ -290,9 +290,10 @@ fun LoginScreen(
                 }else {
                     Text(
                         text = "Log In!",
-                        fontSize = 18.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        fontFamily = poppinsFamily
+                        fontFamily = poppinsFamily,
+                        color = Color.Black
                     )
                 }
             }
@@ -312,7 +313,7 @@ fun LoginScreen(
                 )
                 Text(
                     text = "OR",
-                    fontSize = 18.sp,
+                    fontSize = 14.sp,
                     color = Color.White,
 
                     )
@@ -341,7 +342,7 @@ fun LoginScreen(
                             color = Color.White
                         ),
                     onClick = {
-                        authViewmodel.signInWithGoogleButton()
+                        authViewmodel.signInWithGoogleButton(context)
                     },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(
@@ -405,7 +406,7 @@ fun LoginScreen(
             ){
                 Text(
                     text = "First time user?",
-                    fontSize = 18.sp,
+                    fontSize = 14.sp,
                     color = Color.White,
                     fontFamily = poppinsFamily
                 )
@@ -419,7 +420,7 @@ fun LoginScreen(
                             navController.navigate("signup_screen")
                         },
                     text = "SignUp!!",
-                    fontSize = 18.sp,
+                    fontSize = 14.sp,
                     color = Color.White,
                     fontFamily = poppinsFamily
                 )

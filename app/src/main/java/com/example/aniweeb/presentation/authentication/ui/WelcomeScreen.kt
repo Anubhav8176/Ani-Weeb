@@ -124,7 +124,8 @@ fun WelcomeScreen(
                             .padding(10.dp),
                         text = "Tap to get start!",
                         fontSize = 17.sp,
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.Black
                     )
                 }
 
