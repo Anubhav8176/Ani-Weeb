@@ -105,6 +105,8 @@ class AuthViewmodel @Inject constructor(
                 val credentialManager: CredentialManager = CredentialManager.create(context)
 
                 val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
+                    .setFilterByAuthorizedAccounts(false)
+                    .setAutoSelectEnabled(false)
                     .setServerClientId(context.getString(R.string.web_client_id))
                     .build()
 
