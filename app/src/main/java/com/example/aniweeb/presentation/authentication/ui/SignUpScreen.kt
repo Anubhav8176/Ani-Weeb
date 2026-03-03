@@ -13,13 +13,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDownCircle
@@ -112,6 +115,7 @@ fun SignUpScreen(
 
     Column(
         modifier = modifier
+            .windowInsetsPadding(WindowInsets.navigationBars)
             .fillMaxSize()
             .background(brush = Brush.verticalGradient(
                 colorStops = arrayOf(
@@ -125,7 +129,7 @@ fun SignUpScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.3f),
+                .fillMaxHeight(0.33f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -389,7 +393,7 @@ fun SignUpScreen(
                     Box{
                         Image(
                             modifier = Modifier
-                                .size(26.dp),
+                                .size(20.dp),
                             painter = painterResource(R.drawable.ic_google_icon),
                             contentDescription = "Google Button"
                         )
@@ -424,7 +428,7 @@ fun SignUpScreen(
                     Box{
                         Image(
                             modifier = Modifier
-                                .size(26.dp),
+                                .size(20.dp),
                             painter = painterResource(R.drawable.facebook),
                             contentDescription = "Facebook icon",
                         )
@@ -432,7 +436,7 @@ fun SignUpScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(5.dp))
 
             Row(
                 modifier = modifier
