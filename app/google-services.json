@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:176375101101:android:c8fa8b3310c3d8eba8b824",
         "android_client_info": {
-          "package_name": "com.example.aniweeb"
+          "package_name": "com.anucodes.otakuhub"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "176375101101-qtllkb7ish56t7oo26mpotl6q4invd20.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.aniweeb",
+            "package_name": "com.anucodes.otakuhub",
             "certificate_hash": "8ca970810fcb2b97ae821bf3cf648d5fe04f8386"
           }
         },

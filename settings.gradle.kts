@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AniWeeb"
+rootProject.name = "OtakuHub"
 include(":app")

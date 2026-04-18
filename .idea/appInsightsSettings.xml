@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.aniweeb" />
+                  <option name="appId" value="com.anucodes.otakuhub" />
                   <option name="mobileSdkAppId" value="1:176375101101:android:c8fa8b3310c3d8eba8b824" />
                   <option name="projectId" value="aniweeb-4c619" />
                   <option name="projectNumber" value="176375101101" />
