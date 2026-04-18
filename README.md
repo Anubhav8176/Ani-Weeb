@@ -3,16 +3,16 @@
 <br/>
 
 ```
- █████╗ ███╗  ██╗██╗██╗    ██╗███████╗███████╗██████╗
-██╔══██╗████╗ ██║██║██║    ██║██╔════╝██╔════╝██╔══██╗
-███████║██╔██╗██║██║██║ █╗ ██║█████╗  █████╗  ██████╔╝
-██╔══██║██║╚████║██║██║███╗██║██╔══╝  ██╔══╝  ██╔══██╗
-██║  ██║██║ ╚███║██║╚███╔███╔╝███████╗███████╗██████╔╝
-╚═╝  ╚═╝╚═╝  ╚══╝╚═╝ ╚══╝╚══╝╚══════╝╚══════╝╚═════╝
-                    [ A N I W E E B ]
+ ██████╗ ████████╗ █████╗ ██╗  ██╗██╗   ██╗██╗  ██╗██╗   ██╗██████╗ 
+██╔═══██╗╚══██╔══╝██╔══██╗██║ ██╔╝██║   ██║██║  ██║██║   ██║██╔══██╗
+██║   ██║   ██║   ███████║█████╔╝ ██║   ██║███████║██║   ██║██████╔╝
+██║   ██║   ██║   ██╔══██║██╔═██╗ ██║   ██║██╔══██║██║   ██║██╔══██╗
+╚██████╔╝   ██║   ██║  ██║██║  ██╗╚██████╔╝██║  ██║╚██████╔╝██████╔╝
+ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═════╝
+                    [ O T A K U H U B ]
 ```
 
-### 🌸 *Your Ultimate Anime Companion — Built for True Weebs* 🌸
+### 🌸 *Your Ultimate Anime Companion — Built for True Otakus* 🌸
 
 > 🚧 **This app is still actively being developed — new features and improvements are on the way!**
 
@@ -26,7 +26,7 @@
 
 <br/>
 
-> *"In the world of anime, every frame tells a story. Ani-Weeb puts all those stories at your fingertips."*
+> *"In the world of anime, every frame tells a story. OtakuHub puts all those stories at your fingertips."*
 
 <br/>
 
@@ -34,11 +34,11 @@
 
 ---
 
-## 📖 About AniWeeb
+## 📖 About OtakuHub
 
-**AniWeeb** is a modern, feature-rich Android application crafted for anime enthusiasts who demand a clean, fast, and immersive experience. Built entirely with **Kotlin** and **Jetpack Compose**, it follows cutting-edge Android development practices to deliver a smooth, native app experience.
+**OtakuHub** is a modern, feature-rich Android application crafted for anime enthusiasts who demand a clean, fast, and immersive experience. Built entirely with **Kotlin** and **Jetpack Compose**, it follows cutting-edge Android development practices to deliver a smooth, native app experience.
 
-Whether you're a seasoned otaku tracking hundreds of series or a newcomer just starting your anime journey — AniWeeb has you covered.
+Whether you're a seasoned otaku tracking hundreds of series or a newcomer just starting your anime journey — OtakuHub has you covered.
 
 ---
 
@@ -57,10 +57,10 @@ Whether you're a seasoned otaku tracking hundreds of series or a newcomer just s
 
 ## 🛠️ Tech Stack
 
-Ani-Weeb is built using the latest and greatest in the Android ecosystem:
+OtakuHub is built using the latest and greatest in the Android ecosystem:
 
 ```
-📦 Ani-Weeb
+📦 OtakuHub
 ├── 🎨 UI Layer           → Jetpack Compose + Material 3
 ├── 🧠 Architecture       → MVVM (Model-View-ViewModel)
 ├── 💉 Dependency Inject  → Dagger Hilt
@@ -85,18 +85,19 @@ Ani-Weeb is built using the latest and greatest in the Android ecosystem:
 ## 🏗️ Project Structure
 
 ```
-Ani-Weeb/
+OtakuHub/
 ├── app/
 │   └── src/
 │       └── main/
-│           ├── java/         # Kotlin source code
-│           │   ├── data/     # Data layer (repositories, API, models)
-│           │   ├── domain/   # Business logic (use cases)
-│           │   └── ui/       # UI layer (screens, viewmodels, components)
-│           └── res/          # Resources (themes, drawables)
-├── build.gradle.kts          # App-level build config
-├── settings.gradle.kts       # Project settings
-└── gradle/                   # Gradle wrapper & version catalog
+│           ├── java/
+│           │   └── com/anucodes/otakuhub/
+│           │       ├── data/     # Data layer (repositories, API, models)
+│           │       ├── domain/   # Business logic (use cases)
+│           │       └── ui/       # UI layer (screens, viewmodels, components)
+│           └── res/              # Resources (themes, drawables)
+├── build.gradle.kts              # App-level build config
+├── settings.gradle.kts           # Project settings
+└── gradle/                       # Gradle wrapper & version catalog
 ```
 
 ---
@@ -116,20 +117,20 @@ Make sure you have the following installed:
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/Anubhav8176/Ani-Weeb.git
-cd Ani-Weeb
+git clone https://github.com/Anubhav8176/OtakuHub.git
+cd OtakuHub
 ```
 
 **2. Set up Firebase**
 - Go to [Firebase Console](https://console.firebase.google.com/)
 - Create a new project (or use an existing one)
-- Add an Android app with your package name
+- Add an Android app with package name `com.anucodes.otakuhub`
 - Download the `google-services.json` file
 - Place it inside the `app/` directory
 
 **3. Open in Android Studio**
 ```
-File → Open → Select the Ani-Weeb folder
+File → Open → Select the OtakuHub folder
 ```
 
 **4. Sync & Build**
@@ -173,7 +174,7 @@ Contributions are what make the open source community such an amazing place. Any
 
 ## 🐛 Found a Bug?
 
-If you find a bug, please open an [issue](https://github.com/Anubhav8176/Ani-Weeb/issues) with:
+If you find a bug, please open an [issue](https://github.com/Anubhav8176/OtakuHub/issues) with:
 - A clear title and description
 - Steps to reproduce the bug
 - Expected vs actual behavior
@@ -205,7 +206,7 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 
 **⭐ If you like this project, don't forget to give it a star! ⭐**
 
-*It means a lot and helps other weebs discover the app!*
+*It means a lot and helps other otakus discover the app!*
 
 <br/>
 
