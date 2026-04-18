@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.aniweeb"
+    namespace = "com.anucodes.otakuhub"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.aniweeb"
+        applicationId = "com.anucodes.otakuhub"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
