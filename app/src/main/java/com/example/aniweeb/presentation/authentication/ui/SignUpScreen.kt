@@ -182,7 +182,8 @@ fun SignUpScreen(
                     unfocusedContainerColor = Color.White.copy(alpha = 0.3f),
                     focusedContainerColor = Color.White.copy(alpha = 0.3f),
                     unfocusedBorderColor = Color.White,
-                    focusedBorderColor = Color(0xFFE487FB)
+                    focusedBorderColor = Color(0xFFE487FB),
+                    focusedTextColor = Color.White
                 ),
                 leadingIcon = {
                     Icon(
@@ -223,7 +224,8 @@ fun SignUpScreen(
                     unfocusedContainerColor = Color.White.copy(alpha = 0.3f),
                     focusedContainerColor = Color.White.copy(alpha = 0.3f),
                     unfocusedBorderColor = Color.White,
-                    focusedBorderColor = Color(0xFFE487FB)
+                    focusedBorderColor = Color(0xFFE487FB),
+                    focusedTextColor = Color.White
                 ),
                 leadingIcon = {
                     Icon(
@@ -285,7 +287,8 @@ fun SignUpScreen(
                     unfocusedContainerColor = Color.White.copy(alpha = 0.3f),
                     focusedContainerColor = Color.White.copy(alpha = 0.3f),
                     unfocusedBorderColor = Color.White,
-                    focusedBorderColor = Color(0xFFE487FB)
+                    focusedBorderColor = Color(0xFFE487FB),
+                    focusedTextColor = Color.White
                 ),
                 shape = RoundedCornerShape(10.dp),
                 placeholder = {
