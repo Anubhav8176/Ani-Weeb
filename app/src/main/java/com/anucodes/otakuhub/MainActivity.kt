@@ -12,7 +12,7 @@ import com.anucodes.otakuhub.authentication.viewmodel.AuthViewmodel
 import com.anucodes.otakuhub.core.networking.viewmodel.AnimeViewModel
 import com.anucodes.otakuhub.core.networking.viewmodel.MangaViewModel
 import com.anucodes.otakuhub.presentation.navigation.CentralNavigation
-import com.anucodes.otakuhub.ui.theme.AniWeebTheme
+import com.anucodes.otakuhub.ui.theme.OtakuHubTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            AniWeebTheme {
+            OtakuHubTheme {
                 CentralNavigation(
                     navController = navController,
                     authViewmodel = authViewmodel,

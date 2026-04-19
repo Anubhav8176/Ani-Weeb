@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,7 +47,6 @@ fun MainHomeScreen(
             .background(AppColors.Background)
     ) {
         Scaffold(
-            containerColor = Color.Transparent,
             topBar = {
                 TopAppBar(
                     title = {
@@ -55,7 +55,11 @@ fun MainHomeScreen(
                             fontSize = 25.sp,
                             fontWeight = FontWeight.SemiBold
                         )
-                    }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = AppColors.Background,
+                        titleContentColor = Color.White
+                    )
                 )
             },
             bottomBar = {
@@ -100,6 +104,19 @@ fun MainHomeScreen(
                         modifier = modifier.padding(innerpadding)
                     )
                 }
+
+                composable(
+                    route = BottomNavigationItems.Explore.route,
+                    enterTransition = {
+                        scaleIn(
+                            initialScale = 0.6f,
+                            animationSpec = tween(1000)
+                        ) + fadeIn(animationSpec = tween(1500))
+                    }
+                ) {
+                    ExploreScreen()
+                }
+
 
                 composable(
                     route = BottomNavigationItems.Profile.route,

@@ -1,6 +1,7 @@
 package com.anucodes.otakuhub.presentation.core.home
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,6 +38,7 @@ import coil3.request.ImageRequest
 import com.anucodes.otakuhub.R
 import com.anucodes.otakuhub.authentication.viewmodel.AuthViewmodel
 import com.anucodes.otakuhub.core.networking.viewmodel.AnimeViewModel
+import com.anucodes.otakuhub.ui.theme.AppColors
 import com.anucodes.otakuhub.ui.theme.poppinsFamily
 
 @Composable
@@ -50,6 +52,7 @@ fun ProfileScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(color = AppColors.Background)
     ) {
         ProfileUi(
             authViewmodel = authViewmodel,
