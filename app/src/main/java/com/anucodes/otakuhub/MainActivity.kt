@@ -5,6 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
@@ -28,34 +31,28 @@ class MainActivity : ComponentActivity() {
 
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-
         splashScreen.setKeepOnScreenCondition{true}
 
         enableEdgeToEdge()
-
-        lifecycleScope.launch {
-            animeViewModel.getTopAnime()
-            animeViewModel.getLatestAnime()
-            animeViewModel.getAnime()
-
-            delay(5000L)
-
-            mangaViewModel.getAllManga()
-            mangaViewModel.getTopManga()
-            mangaViewModel.getLatestManga()
-            splashScreen.setKeepOnScreenCondition{false}
-        }
-
-
         setContent {
             val navController = rememberNavController()
+            val isAuthenticated by authViewmodel.isAuthenticated.collectAsState()
+
+            val startDestination = if (!isAuthenticated){
+                "auth_graph"
+            }else{
+                "home_graph"
+            }
+
+            splashScreen.setKeepOnScreenCondition {false}
 
             OtakuHubTheme {
                 CentralNavigation(
                     navController = navController,
                     authViewmodel = authViewmodel,
                     animeViewModel = animeViewModel,
-                    mangaViewModel = mangaViewModel
+                    mangaViewModel = mangaViewModel,
+                    startDestination = startDestination
                 )
             }
         }

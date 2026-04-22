@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -42,7 +41,7 @@ import com.anucodes.otakuhub.ui.theme.poppinsFamily
 
 
 @Composable
-fun MangaHomeScreen(
+fun MangaScreen(
     navController: NavHostController,
     mangaViewModel: MangaViewModel,
     modifier: Modifier = Modifier
@@ -52,7 +51,13 @@ fun MangaHomeScreen(
     val latestManga by mangaViewModel.latestManga.collectAsState()
     val allManga by mangaViewModel.allManga.collectAsState()
 
-    val chunkedManga = allManga.chunked(2)
+    val chunkedManga: List<List<MangaMinInfo>> = allManga.chunked(2)
+
+    LaunchedEffect(Unit) {
+        mangaViewModel.getTopManga()
+        mangaViewModel.getAllManga()
+        mangaViewModel.getLatestManga()
+    }
 
     LazyColumn (
         modifier = modifier
@@ -95,35 +100,37 @@ fun MangaHomeScreen(
             )
         }
 
-        itemsIndexed(chunkedManga) { index, mangaPair ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Box(modifier = Modifier.weight(1f)) {
-                    MainMangaDetail(
-                        mangaMinInfo = mangaPair[0],
-                        navController = navController,
-                        mangaViewModel = mangaViewModel
-                    )
-                }
-
-                Box(modifier = Modifier.weight(1f)) {
-                    if (mangaPair.size > 1) {
+        chunkedManga?.let {
+            itemsIndexed(chunkedManga) { index, mangaPair ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Box(modifier = Modifier.weight(1f)) {
                         MainMangaDetail(
-                            mangaMinInfo = mangaPair[1],
+                            mangaMinInfo = mangaPair[0],
                             navController = navController,
                             mangaViewModel = mangaViewModel
                         )
                     }
-                }
-            }
 
-            if (index == chunkedManga.size - 3) {
-                LaunchedEffect(index) {
-                    mangaViewModel.getAllManga()
+                    Box(modifier = Modifier.weight(1f)) {
+                        if (mangaPair.size > 1) {
+                            MainMangaDetail(
+                                mangaMinInfo = mangaPair[1],
+                                navController = navController,
+                                mangaViewModel = mangaViewModel
+                            )
+                        }
+                    }
+                }
+
+                if (index == chunkedManga.size - 3) {
+                    LaunchedEffect(index) {
+                        mangaViewModel.getAllManga()
+                    }
                 }
             }
         }

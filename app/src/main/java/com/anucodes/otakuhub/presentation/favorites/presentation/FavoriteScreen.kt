@@ -1,5 +1,6 @@
-package com.anucodes.otakuhub.favorites.presentation
+package com.anucodes.otakuhub.presentation.favorites.presentation
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -37,15 +38,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
+import com.anucodes.otakuhub.core.model.FavoriteStatus
 import com.anucodes.otakuhub.core.networking.viewmodel.AnimeViewModel
 import com.anucodes.otakuhub.core.networking.viewmodel.MangaViewModel
-import com.anucodes.otakuhub.favorites.model.UserFavorite
+import com.anucodes.otakuhub.presentation.favorites.model.UserFavorite
 import com.anucodes.otakuhub.ui.theme.poppinsFamily
 
 @Composable
@@ -57,11 +60,24 @@ fun FavoriteScreen(
 ) {
 
     val favorite by animeViewModel.favorites.collectAsState()
+    val favoriteStatus by animeViewModel.favoriteStatus.collectAsState()
+    val context = LocalContext.current
 
     var selectedFavoriteAnimeTab by remember { mutableStateOf(true) }
 
     val favAnime = favorite.filter { it.category == "anime" }
     val favManga = favorite.filter { it.category == "manga" }
+
+    when(favoriteStatus){
+        is FavoriteStatus.Failure -> {
+            Toast.makeText(context, (favoriteStatus as FavoriteStatus.Failure).message, Toast.LENGTH_SHORT).show()
+            animeViewModel.updateFavoriteStatus()
+        }
+        is FavoriteStatus.Success ->{
+            Toast.makeText(context, (favoriteStatus as FavoriteStatus.Success).message, Toast.LENGTH_SHORT).show()
+            animeViewModel.updateFavoriteStatus()
+        }else -> {}
+    }
 
     Box(
         modifier = modifier

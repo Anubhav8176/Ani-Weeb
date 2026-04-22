@@ -1,4 +1,4 @@
-package com.anucodes.otakuhub.favorites.model
+package com.anucodes.otakuhub.presentation.favorites.model
 
 
 data class UserFavorite(

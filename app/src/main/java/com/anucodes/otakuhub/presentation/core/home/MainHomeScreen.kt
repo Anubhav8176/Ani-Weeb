@@ -98,7 +98,7 @@ fun MainHomeScreen(
                         ) + fadeIn(animationSpec = tween(1500))
                     }
                 ) {
-                    MangaHomeScreen(
+                    MangaScreen(
                         navController = navController,
                         mangaViewModel = mangaViewModel,
                         modifier = modifier.padding(innerpadding)

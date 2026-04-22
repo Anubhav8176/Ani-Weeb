@@ -1,5 +1,6 @@
 package com.anucodes.otakuhub.presentation.core.details
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,13 +41,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.anucodes.otakuhub.core.model.FavoriteStatus
 import com.anucodes.otakuhub.core.networking.viewmodel.AnimeViewModel
-import com.anucodes.otakuhub.favorites.model.UserFavorite
+import com.anucodes.otakuhub.presentation.favorites.model.UserFavorite
+import com.anucodes.otakuhub.ui.theme.AppColors
 import com.anucodes.otakuhub.ui.theme.poppinsFamily
 
 @Composable
@@ -56,8 +59,22 @@ fun AnimeDetailsScreen(
     modifier: Modifier = Modifier
 ) {
 
+    val context = LocalContext.current
+
     val animeInfo by animeViewModel.animeInfo.collectAsState()
     var isImageLoading by remember { mutableStateOf(true) }
+    val favoriteStatus by animeViewModel.favoriteStatus.collectAsState()
+
+    when(favoriteStatus){
+        is FavoriteStatus.Failure -> {
+            Toast.makeText(context, (favoriteStatus as FavoriteStatus.Failure).message, Toast.LENGTH_SHORT).show()
+            animeViewModel.updateFavoriteStatus()
+        }
+        is FavoriteStatus.Success ->{
+            Toast.makeText(context, (favoriteStatus as FavoriteStatus.Success).message, Toast.LENGTH_SHORT).show()
+            animeViewModel.updateFavoriteStatus()
+        }else -> {}
+    }
 
     if (isImageLoading){
         CircularProgressIndicator(
@@ -70,23 +87,8 @@ fun AnimeDetailsScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
+            .background(color = AppColors.Background)
     ){
-        Column(
-            modifier = modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
-        ) {
-            Column(
-                modifier = modifier
-                    .fillMaxHeight(0.25f)
-                    .fillMaxWidth()
-                    .background(color = Color.Magenta)
-            ){
-
-            }
-        }
-
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -118,7 +120,8 @@ fun AnimeDetailsScreen(
                     fontFamily = poppinsFamily,
                     fontSize = 23.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    color = Color.White
                 )
             }
 
@@ -130,7 +133,8 @@ fun AnimeDetailsScreen(
                 Text(
                     text = "${animeInfo?.data?.status}",
                     fontSize = 18.sp,
-                    fontFamily = poppinsFamily
+                    fontFamily = poppinsFamily,
+                    color = Color.White
                 )
 
                 Spacer(modifier.weight(1F))
@@ -139,7 +143,8 @@ fun AnimeDetailsScreen(
                     Text(
                         text = it,
                         fontSize = 18.sp,
-                        fontFamily = poppinsFamily
+                        fontFamily = poppinsFamily,
+                        color = Color.White
                     )
                 }
             }
@@ -153,7 +158,8 @@ fun AnimeDetailsScreen(
                 Text(
                     text = "Score: ${animeInfo?.data?.score}",
                     fontSize = 18.sp,
-                    fontFamily = poppinsFamily
+                    fontFamily = poppinsFamily,
+                    color = Color.White
                 )
 
                 Spacer(modifier.weight(1f))
@@ -161,7 +167,8 @@ fun AnimeDetailsScreen(
                 Text(
                     text = "Source: ${animeInfo?.data?.source}",
                     fontFamily = poppinsFamily,
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
             }
             Spacer(modifier = modifier.height(10.dp))
@@ -182,13 +189,15 @@ fun AnimeDetailsScreen(
                     Text(
                         fontSize = 18.sp,
                         text = it,
-                        fontFamily = poppinsFamily
+                        fontFamily = poppinsFamily,
+                        color = Color.White
                     )
                 }
                 Text(
                     text = "-${animeInfo?.data?.year}",
                     fontSize = 18.sp,
-                    fontFamily = poppinsFamily
+                    fontFamily = poppinsFamily,
+                    color = Color.White
                 )
 
                 Spacer(modifier.weight(1f))
@@ -203,7 +212,8 @@ fun AnimeDetailsScreen(
                     Text(
                         text = "Episodes: ${animeInfo?.data?.episodes}",
                         fontSize = 18.sp,
-                        fontFamily = poppinsFamily
+                        fontFamily = poppinsFamily,
+                        color = Color.White
                     )
                 }
             }
@@ -223,7 +233,8 @@ fun AnimeDetailsScreen(
                 Text(
                     text = animeInfo?.data?.popularity.toString(),
                     fontFamily = poppinsFamily,
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
 
                 Spacer(modifier.weight(1F))
@@ -237,7 +248,8 @@ fun AnimeDetailsScreen(
                 Text(
                     text = animeInfo?.data?.rank.toString(),
                     fontSize = 18.sp,
-                    fontFamily = poppinsFamily
+                    fontFamily = poppinsFamily,
+                    color = Color.White
                 )
             }
 
@@ -252,7 +264,8 @@ fun AnimeDetailsScreen(
                     text = it,
                     fontSize = 18.sp,
                     fontFamily = poppinsFamily,
-                    textAlign = TextAlign.Left
+                    textAlign = TextAlign.Left,
+                    color = Color.White
                 )
             }
 
@@ -267,20 +280,20 @@ fun AnimeDetailsScreen(
                     modifier = modifier
                         .weight(1f)
                         .padding(end = 8.dp),
-                    color = Color.Black
+                    color = Color.White
                 )
                 Text(
                     text = "Description",
                     fontSize = 18.sp,
                     fontFamily = poppinsFamily,
-                    color = Color.Black,
+                    color = Color.White,
 
                     )
                 Divider(
                     modifier = modifier
                         .weight(1f)
                         .padding(start = 8.dp),
-                    color = Color.Black
+                    color = Color.White
                 )
             }
 
@@ -294,7 +307,8 @@ fun AnimeDetailsScreen(
                     text = it,
                     fontSize = 18.sp,
                     fontFamily = poppinsFamily,
-                    textAlign = TextAlign.Left
+                    textAlign = TextAlign.Left,
+                    color = Color.White
                 )
             }
 

@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.anucodes.otakuhub.core.model.AnimeFullInfo
 import com.anucodes.otakuhub.core.model.AnimeMinInfo
 import com.anucodes.otakuhub.core.model.AnimeResponse
+import com.anucodes.otakuhub.core.model.FavoriteStatus
+import com.anucodes.otakuhub.core.model.NetworkStatus
 import com.anucodes.otakuhub.core.networking.retrofit.AnimeApiInterface
-import com.anucodes.otakuhub.favorites.model.UserFavorite
+import com.anucodes.otakuhub.presentation.favorites.model.UserFavorite
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,6 +28,12 @@ class AnimeViewModel @Inject constructor(
     private val auth: FirebaseAuth
 ): ViewModel() {
 
+    private val _networkStatus = MutableStateFlow<NetworkStatus>(NetworkStatus.Idle)
+    val networkStatus = _networkStatus.asStateFlow()
+
+    private val _favoriteStatus = MutableStateFlow<FavoriteStatus>(FavoriteStatus.Idle)
+    val favoriteStatus = _favoriteStatus.asStateFlow()
+
     private val _favorites = MutableStateFlow<List<UserFavorite>>(emptyList())
     val favorites = _favorites.asStateFlow()
 
@@ -43,58 +51,66 @@ class AnimeViewModel @Inject constructor(
     private val _animeInfo = MutableStateFlow<AnimeFullInfo?>(null)
     val animeInfo = _animeInfo.asStateFlow()
 
-    init {
-        getAllFavorites()
-    }
-
     fun getAnime(){
         viewModelScope.launch {
+            _networkStatus.value = NetworkStatus.Loading
             try {
                 val response = animeApiInterface.getAllAnime(page = page)
                 _allAnime.value += response.data
                 page++
+                _networkStatus.value = NetworkStatus.Success
             }catch (e: Exception){
                 Log.e("Failed to load data: ", e.message.toString())
+                _networkStatus.value = NetworkStatus.Failure("Failed to load Anime!")
             }
         }
     }
 
     fun getTopAnime(){
         viewModelScope.launch {
+            _networkStatus.value = NetworkStatus.Loading
             try {
                 val response = animeApiInterface.getTopAnime("bypopularity")
                 _topAnime.value = response
+                _networkStatus.value = NetworkStatus.Success
             }catch (e: Exception){
                 Log.e("Failed to load data: ", e.message.toString())
+                _networkStatus.value = NetworkStatus.Failure("Failed to load top animes!!")
             }
         }
     }
 
     fun getLatestAnime(){
         viewModelScope.launch {
+            _networkStatus.value = NetworkStatus.Loading
             try {
                 val response = animeApiInterface.getLatestAnime("airing")
                 _latestAnime.value = response
+                _networkStatus.value = NetworkStatus.Success
             }catch (e: Exception){
                 Log.e("Failed to load latest: ", e.message.toString())
+                _networkStatus.value = NetworkStatus.Failure("Failed to load latest animes!!")
             }
         }
     }
 
     fun getAnimeInfoById(id: Int){
         viewModelScope.launch {
+            _networkStatus.value = NetworkStatus.Loading
             try {
                 val response = animeApiInterface.getAnimeInfo(id = id)
                 _animeInfo.value = response
-                Log.i("The Anime data for ${id}", response.toString())
+                _networkStatus.value = NetworkStatus.Success
             }catch (e: Exception){
                 Log.e("Load Anime Info: ", "Failed!! ${e.message}")
+                _networkStatus.value = NetworkStatus.Failure("Failed to load anime info!!")
             }
         }
     }
 
     fun addAnimeToFavorite(favAnime: UserFavorite){
         viewModelScope.launch {
+            _favoriteStatus.value = FavoriteStatus.Loading
             try {
                 val currUser = auth.currentUser
                 if (currUser != null){
@@ -113,15 +129,18 @@ class AnimeViewModel @Inject constructor(
                         }
 
                     getAllFavorites()
+                    _favoriteStatus.value = FavoriteStatus.Success("Added to favorite!")
                 }
             }catch (e: Exception){
                 Log.e("Cannot add to favorite: ", e.message.toString())
+                _favoriteStatus.value = FavoriteStatus.Success("Failed to add!")
             }
         }
     }
 
     fun deleteFavoriteAnime(favAnime: UserFavorite){
         viewModelScope.launch {
+            _favoriteStatus.value = FavoriteStatus.Loading
             try {
                 val currUser = auth.currentUser
                 if(currUser != null){
@@ -133,14 +152,16 @@ class AnimeViewModel @Inject constructor(
                         .update("favorite", FieldValue.arrayRemove(favAnime))
                         .addOnSuccessListener {
                             getAllFavorites()
-                            Log.i("Delete favorite: ", "It's a success!!")
+                            _favoriteStatus.value = FavoriteStatus.Success("Removed from favorite!")
                         }
                         .addOnFailureListener {
                             Log.e("Delete favorite:", "It's a failure!!")
+                            _favoriteStatus.value = FavoriteStatus.Failure("Failed to delete!")
                         }
                 }
             }catch (e: Exception){
                 Log.e("Delete the favorite: ", e.message.toString())
+                _favoriteStatus.value = FavoriteStatus.Failure("Failed to delete!")
             }
         }
     }
@@ -184,6 +205,14 @@ class AnimeViewModel @Inject constructor(
                 Log.e("Get all favorites", e.message.toString())
             }
         }
+    }
+
+    fun updateFavoriteStatus(){
+        _favoriteStatus.value = FavoriteStatus.Idle
+    }
+
+    fun updateNetworkStatus(){
+        _networkStatus.value = NetworkStatus.Idle
     }
 
 }

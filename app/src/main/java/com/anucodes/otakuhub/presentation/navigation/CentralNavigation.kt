@@ -5,8 +5,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -15,7 +13,7 @@ import androidx.navigation.navigation
 import com.anucodes.otakuhub.authentication.viewmodel.AuthViewmodel
 import com.anucodes.otakuhub.core.networking.viewmodel.AnimeViewModel
 import com.anucodes.otakuhub.core.networking.viewmodel.MangaViewModel
-import com.anucodes.otakuhub.favorites.presentation.FavoriteScreen
+import com.anucodes.otakuhub.presentation.favorites.presentation.FavoriteScreen
 import com.anucodes.otakuhub.presentation.authentication.ui.LoginScreen
 import com.anucodes.otakuhub.presentation.authentication.ui.SignUpScreen
 import com.anucodes.otakuhub.presentation.authentication.ui.WelcomeScreen
@@ -29,16 +27,9 @@ fun CentralNavigation(
     navController: NavHostController,
     authViewmodel: AuthViewmodel,
     animeViewModel: AnimeViewModel,
-    mangaViewModel: MangaViewModel
+    mangaViewModel: MangaViewModel,
+    startDestination: String
 ) {
-
-    val isAuthenticated by authViewmodel.isAuthenticated.collectAsState()
-
-    val startDestination = if (!isAuthenticated){
-        "auth_graph"
-    }else{
-        "home_graph"
-    }
 
     NavHost(
         navController = navController,

@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.anucodes.otakuhub.core.networking.viewmodel.MangaViewModel
-import com.anucodes.otakuhub.favorites.model.UserFavorite
+import com.anucodes.otakuhub.presentation.favorites.model.UserFavorite
 import com.anucodes.otakuhub.ui.theme.poppinsFamily
 
 
