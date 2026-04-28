@@ -114,7 +114,7 @@ fun MainHomeScreen(
                         ) + fadeIn(animationSpec = tween(1500))
                     }
                 ) {
-                    ExploreScreen()
+                    ExploreScreen(modifier = modifier.padding(innerpadding))
                 }
 
 

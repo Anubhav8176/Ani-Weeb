@@ -58,6 +58,7 @@ class AnimeViewModel @Inject constructor(
                 val response = animeApiInterface.getAllAnime(page = page)
                 _allAnime.value += response.data
                 page++
+                Log.i("All anime: ", "This function is called")
                 _networkStatus.value = NetworkStatus.Success
             }catch (e: Exception){
                 Log.e("Failed to load data: ", e.message.toString())

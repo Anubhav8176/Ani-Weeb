@@ -33,7 +33,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.anucodes.otakuhub.core.model.MangaMinInfo
+import com.anucodes.otakuhub.core.model.MangaResponse
 import com.anucodes.otakuhub.core.networking.viewmodel.MangaViewModel
+import com.anucodes.otakuhub.presentation.core.shared.AnimeScreenShimmer
 import com.anucodes.otakuhub.presentation.core.shared.HomeMangaSection
 import com.anucodes.otakuhub.presentation.core.shared.RatingStars
 import com.anucodes.otakuhub.ui.theme.AppColors
@@ -58,6 +60,32 @@ fun MangaScreen(
         mangaViewModel.getAllManga()
         mangaViewModel.getLatestManga()
     }
+
+    if ((topManga?.data?.isNotEmpty()==true) && (latestManga?.data?.isNotEmpty() == true) && chunkedManga.isNotEmpty()){
+        MainMangaScreen(
+            modifier = modifier,
+            navController = navController,
+            mangaViewModel = mangaViewModel,
+            topManga = topManga,
+            latestManga = latestManga,
+            chunkedManga = chunkedManga
+        )
+    }else{
+        AnimeScreenShimmer(modifier = modifier)
+    }
+
+}
+
+
+@Composable
+fun MainMangaScreen(
+    modifier: Modifier,
+    navController: NavHostController,
+    mangaViewModel: MangaViewModel,
+    topManga: MangaResponse?,
+    latestManga: MangaResponse?,
+    chunkedManga: List<List<MangaMinInfo>>
+){
 
     LazyColumn (
         modifier = modifier
@@ -137,6 +165,7 @@ fun MangaScreen(
     }
 
 }
+
 
 @Composable
 fun MainMangaDetail(

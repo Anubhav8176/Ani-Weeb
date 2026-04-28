@@ -1,6 +1,5 @@
 package com.anucodes.otakuhub.presentation.core.bottomnavigation
 
-//noinspection UsingMaterialAndMaterial3Libraries
 import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,6 +24,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.anucodes.otakuhub.ui.theme.AppColors
 import com.anucodes.otakuhub.ui.theme.poppinsFamily
@@ -110,8 +110,11 @@ fun BottomNavigationBar(
                     selected = currentRoute == items.route,
                     onClick = {
                         navController.navigate(items.route) {
-                            popUpTo(navController.graph.startDestinationId)
+                            popUpTo(navController.graph.findStartDestination().id){
+                                saveState = true
+                            }
                             launchSingleTop = true
+                            restoreState = true
                         }
                     },
                     colors = NavigationBarItemDefaults.colors(

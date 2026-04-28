@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.anucodes.otakuhub.core.networking.viewmodel.MangaViewModel
 import com.anucodes.otakuhub.presentation.favorites.model.UserFavorite
+import com.anucodes.otakuhub.ui.theme.AppColors
 import com.anucodes.otakuhub.ui.theme.poppinsFamily
 
 
@@ -57,30 +58,8 @@ fun MangaDetailsScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
+            .background(AppColors.Background)
     ){
-        Column(
-            modifier = modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Column(
-                modifier = modifier
-                    .fillMaxHeight(0.3f)
-                    .fillMaxWidth()
-                    .background(color = Color.Red)
-            ){
-
-            }
-
-            Column(
-                modifier = modifier
-                    .fillMaxHeight(0.7f)
-                    .fillMaxWidth()
-            ){
-
-            }
-        }
-
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -108,14 +87,16 @@ fun MangaDetailsScreen(
                     fontFamily = poppinsFamily,
                     fontSize = 23.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    color = Color.White
                 )
             }
             Spacer(modifier.height(10.dp))
             Text(
                 text = "Score ${mangaInfo?.data?.score}",
                 fontSize = 18.sp,
-                fontFamily = poppinsFamily
+                fontFamily = poppinsFamily,
+                color = Color.White
             )
             Spacer(modifier = modifier.height(10.dp))
 
@@ -133,7 +114,8 @@ fun MangaDetailsScreen(
                 Text(
                     text = mangaInfo?.data?.popularity.toString(),
                     fontFamily = poppinsFamily,
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
 
                 Spacer(modifier.weight(1F))
@@ -147,7 +129,8 @@ fun MangaDetailsScreen(
                 Text(
                     text = mangaInfo?.data?.rank.toString(),
                     fontSize = 18.sp,
-                    fontFamily = poppinsFamily
+                    fontFamily = poppinsFamily,
+                    color = Color.White
                 )
             }
 
@@ -169,13 +152,15 @@ fun MangaDetailsScreen(
                     Text(
                         text = mangaInfo?.data?.volumes.toString(),
                         fontFamily = poppinsFamily,
-                        fontSize = 18.sp
+                        fontSize = 18.sp,
+                        color = Color.White
                     )
                 }else{
                     Text(
                         text = "Ongoing",
                         fontFamily = poppinsFamily,
-                        fontSize = 18.sp
+                        fontSize = 18.sp,
+                        color = Color.White
                     )
                 }
 
@@ -184,13 +169,14 @@ fun MangaDetailsScreen(
                 Icon(
                     imageVector = Icons.Default.Article,
                     contentDescription = "Chapters",
-                    tint = Color.Black
+                    tint = Color.White
                 )
                 Spacer(modifier.width(10.dp))
                 Text(
                     text = mangaInfo?.data?.chapters.toString(),
                     fontFamily = poppinsFamily,
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
             }
 
@@ -198,7 +184,8 @@ fun MangaDetailsScreen(
                 Text(
                     text = it.toString(),
                     fontSize = 18.sp,
-                    fontFamily = poppinsFamily
+                    fontFamily = poppinsFamily,
+                    color = Color.White
                 )
             }
 
@@ -214,21 +201,21 @@ fun MangaDetailsScreen(
                     modifier = modifier
                         .weight(1f)
                         .padding(end = 8.dp),
-                    color = Color.Black
+                    color = Color.White
                 )
                 Text(
                     text = "Description",
                     fontSize = 18.sp,
                     fontFamily = poppinsFamily,
-                    color = Color.Black,
                     fontWeight = FontWeight.Bold,
-                    textDecoration = TextDecoration.Underline
+                    textDecoration = TextDecoration.Underline,
+                    color = Color.White
                 )
                 Divider(
                     modifier = modifier
                         .weight(1f)
                         .padding(start = 8.dp),
-                    color = Color.Black
+                    color = Color.White
                 )
             }
 
@@ -241,7 +228,8 @@ fun MangaDetailsScreen(
                     text = it,
                     fontSize = 18.sp,
                     fontFamily = poppinsFamily,
-                    textAlign = TextAlign.Left
+                    textAlign = TextAlign.Left,
+                    color = Color.White
                 )
             }
 
@@ -257,21 +245,21 @@ fun MangaDetailsScreen(
                     modifier = modifier
                         .weight(1f)
                         .padding(end = 8.dp),
-                    color = Color.Black
+                    color = Color.White
                 )
                 Text(
                     text = "Author",
                     fontSize = 18.sp,
                     fontFamily = poppinsFamily,
-                    color = Color.Black,
                     fontWeight = FontWeight.Bold,
-                    textDecoration = TextDecoration.Underline
+                    textDecoration = TextDecoration.Underline,
+                    color = Color.White
                 )
                 Divider(
                     modifier = modifier
                         .weight(1f)
                         .padding(start = 8.dp),
-                    color = Color.Black
+                    color = Color.White
                 )
             }
 
@@ -284,23 +272,26 @@ fun MangaDetailsScreen(
                         modifier = modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(15.dp))
-                            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(15.dp))
+                            .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(15.dp))
                             .padding(horizontal = 15.dp, vertical = 5.dp)
                     ) {
                         Text(
                             text = author.name,
                             fontSize = 18.sp,
-                            fontFamily = poppinsFamily
+                            fontFamily = poppinsFamily,
+                            color = Color.White
                         )
                         Text(
                             text = author.type,
                             fontSize = 18.sp,
-                            fontFamily = poppinsFamily
+                            fontFamily = poppinsFamily,
+                            color = Color.White
                         )
                         Text(
                             text = "more..",
                             fontSize = 18.sp,
-                            fontFamily = poppinsFamily
+                            fontFamily = poppinsFamily,
+                            color = Color.White
                         )
                     }
                 }
